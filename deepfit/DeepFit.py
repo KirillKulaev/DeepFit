@@ -28,8 +28,8 @@ def get_normed_spectra(spectra, k):
     return normed_spectra
 
 
-def masked_normed_l1(candidate_signal, ref_spectra, k, left=-2.4, right=9.):
-    mask = (k > left) & (k < right)
+def masked_normed_l1(candidate_signal, ref_spectra, k, left, right):
+    mask = (k > left) & (right < 8.)
     candidate_signal = candidate_signal[mask]
     ref_spectra = ref_spectra[0][mask]
     k = k[mask]
@@ -70,6 +70,8 @@ class DeepFit():
             self.criteria = self.normed_l2
             self.mask = (model.k > fit_edges[0]) & (model.k < fit_edges[1])
             self.xtb_grad_call = f"cd {tmp_folder} && {path2xtb} process_structure.xyz --chrg {structure.charge} --uhf {structure.spin} --grad"
+            self.history_sp_loss = []
+            self.history_energy = []
 
     
         @staticmethod
@@ -102,13 +104,18 @@ class DeepFit():
                 forces = [[float(g.split()[0]), float(g.split()[1]), float(g.split()[2])] for g in lines[len(lines)//2+1:-1]]
             return torch.tensor(forces).to(self.structure.device)
 
+        def parse_energy(self):
+            with open(f'{self.tmp_folder}/energy', 'r') as f:
+                energy = float(f.read().splitlines()[1].split()[1])
+            return torch.tensor(energy).to(self.structure.device)
+
     
         @staticmethod
         def struct2xyz(struct):
             return '\n'.join([f'{i} {float(j[0])} {float(j[1])} {float(j[2])}' for i, j in zip(struct.elements, struct.pos)])
 
     
-        def run(self, num_steps=500, verbose=1):
+        def run(self, num_steps=500, verbose=1, final_geomopt=False, distance_weightning=False):
             print(f'Fitting of the structure')
             for iteration in tqdm(range(num_steps)):
                 
@@ -118,14 +125,49 @@ class DeepFit():
                     loss.backward()
                     xyz = self.struct2xyz(self.structure)
                     forces = self.get_xtb_forces(xyz)
-                    self.structure.data['pos'].grad += self.forces_coeff*forces
+                    energy = self.parse_energy()
+
+                    if distance_weightning:
+                        i = (np.array(self.structure.elements) == self.structure.absorber).argmax()
+                        dist_to_absorber = torch.sqrt(((self.structure.data['pos'] - self.structure.data['pos'][i])**2).sum(axis=1)).view(-1, 1)
+                        self.structure.data['pos'].grad = self.weight_distance(dist_to_absorber)*self.structure.data['pos'].grad + self.forces_coeff*forces
+                    else:
+                        self.structure.data['pos'].grad += self.forces_coeff*forces
+
+                    if final_geomopt and (num_steps - iteration) < 10:
+                        self.structure.data['pos'].grad = self.forces_coeff*forces
+                        
                     if verbose == 1 and iteration % 5 == 0:
-                        print(f'Spectra deviation L2 norm: {float(loss)}, Forces norm: {torch.abs(forces).mean()}')
+                        print(f'Spectra deviation L2 norm: {float(loss)}, Energy: {float(energy)}, Forces norm: {torch.abs(forces).mean()}')
+                        
                     self.history.append(xyz)
                     self.history_spec.append(self.candidate_signal.detach().cpu().numpy())
+                    self.history_sp_loss.append(float(loss))
+                    self.history_energy.append(float(energy))
                     return loss
                     
                 self.optimizer.step(closure)
             final_spectra = self.model(self.structure.data).detach().cpu().numpy()
             return self.structure, final_spectra
+
+        @staticmethod
+        def weight_distance(r, u=0.4):
+            return torch.exp(- u**2 * r**2)
     
+        def eval_stability(self, xyz, absorber, radii=3.5):
+            mask = []
+            for a in xyz.splitlines():
+                if a.split()[0] == absorber:
+                    center_coords = np.array([float(i) for i in a.split()[1:]])
+            for a in xyz.splitlines():
+                coord = np.array([float(i) for i in a.split()[1:]])
+                r = np.sqrt(((coord - center_coords)**2).sum())
+                if r < radii:
+                    mask.append(True)
+                else:
+                    mask.append(False)
+            forces = self.get_xtb_forces(xyz).cpu().numpy()
+            local_forces = forces[mask]
+            norm_grad = np.mean(np.abs(local_forces))
+            return norm_grad
+
