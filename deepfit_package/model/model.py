@@ -32,7 +32,7 @@ class Net(nn.Module):
         self.linear3 = nn.Linear(hidden_dim, out_dim)
         self.k = torch.tensor([-2.4  , -2.2  , -2.   , -1.8  , -1.6  , -1.4  , -1.2  , -1.   , -0.887, -0.627,  0.627,  0.887,  1.087,  1.255,  1.403,  1.537, 1.66 ,  1.775,  1.882,  1.9  ,  2.   ,  2.1  ,  2.2  ,  2.3  , 2.4  ,  2.5  ,  2.6  ,  2.7  ,  2.8  ,  2.9  ,  3.   ,  3.1  , 3.2  ,  3.3  ,  3.4  ,  3.5  ,  3.6  ,  3.7  ,  3.8  ,  3.9  , 4.   ,  4.1  ,  4.2  ,  4.3  ,  4.4  ,  4.5  ,  4.6  ,  4.7  , 4.8  ,  4.9  ,  5.   ,  5.1  ,  5.2  ,  5.3  ,  5.4  ,  5.5  , 5.6  ,  5.7  ,  5.8  ,  5.9  ,  6.   ,  6.1  ,  6.2  ,  6.3  , 6.4  ,  6.5  ,  6.6  ,  6.7  ,  6.8  ,  6.9  ,  7.   ,  7.1  , 7.2  ,  7.3  ,  7.4  ,  7.5  ,  7.6  ,  7.7  ,  7.8  ,  7.9  , 8.   ,  8.1  ,  8.2  ,  8.3  ,  8.4  ,  8.5  ,  8.6  ,  8.7  , 8.8  ,  8.9  ,  9.   ], dtype=torch.float32, device=device)
         self.device = device
-        self.load_weights()
+        self.load_weights(weights)
 
     def forward(self, data):
         h = self.atom_encoder(data)
@@ -41,9 +41,9 @@ class Net(nn.Module):
         h = self.linear3(h)
         return h
 
-    def load_weights(self, weights=):
+    def load_weights(self, weights):
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        weights_path = os.path.join(current_dir, "weights", "autumn2025_TMQM.pt")
+        weights_path = os.path.join(current_dir, "weights", weights)
         self.load_state_dict(torch.load(weights_path, map_location=torch.device(self.device)))
 
 
