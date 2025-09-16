@@ -9,7 +9,7 @@ PACKAGE_DATA = {
     "deepfit": [
         "model/*.npz",
         "model/*.py",
-        "model/weights",
+        "model/weights/*",
     ]
 }
 
@@ -17,7 +17,7 @@ setup(
     name="deepfit",
     version="0.1.0",
     description="DeepFit: physically and chemically informed XAS-Structure fitting made simple",
-    url="https://github.com/<your-username>/deepfit",
+    url="https://github.com/KirillKulaev/DeepFit",
     author="Kirill Kulaev, Bogdan Procenko",
     author_email="<your-email@example.com>",
     packages=find_packages(include=["deepfit", "deepfit.*"]),
@@ -26,7 +26,11 @@ setup(
     install_requires=REQUIRED_PACKAGES,
     python_requires=">=3.7",
     license="Apache 2.0",
-    scripts=["deepfit/DeepFit.py"],
+    entry_points={
+        "console_scripts": [
+            "deepfit=deepfit.DeepFit:main",
+        ],
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
