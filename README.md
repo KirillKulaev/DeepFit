@@ -14,11 +14,7 @@ pip install deepfit_package
 ### Structure Refinement
 
 ```python
-# Basic structure refinement
-
-## Quick Start
-
-```python
+# Structure refinement
 import deepfit_package
 from deepfit_package import DeepFit, Structure, Net
 
