@@ -62,8 +62,8 @@ predicted_spectrum = model(structure_data)
 
 DeepFit is a method for structure-XAS fitting. The optimization objective combines spectral agreement and chemical plausibility:
 
-```
-$R* = \argmin[R] [D(X,\mathbf{R},\chi(k)) + \lambda E(\mathbf{R})]$
+```math
+R^* = \arg\min_{R} \left[ D(X,\mathbf{R},\chi(k)) + \lambda E(\mathbf{R}) \right]
 ```
 
 Where:
