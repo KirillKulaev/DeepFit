@@ -1,2 +1,2 @@
-from deepfit_package.deepfit import *
-from model import *
+from .deepfit import *
+from .model.model import *
