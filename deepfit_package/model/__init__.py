@@ -1,1 +1,1 @@
-from model.model import Net
+from model.model import *
