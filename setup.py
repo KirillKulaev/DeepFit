@@ -7,9 +7,9 @@ with open("requirements.txt") as f:
 # Data files inside the package (non-Python files)
 PACKAGE_DATA = {
     "deepfit": [
-        "examples/model/*.npz",
-        "examples/model/*.py",
-        "examples/model/weights/*",
+        "model/*.npz",
+        "model/*.py",
+        "model/weights",
     ]
 }
 
