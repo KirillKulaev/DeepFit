@@ -5,7 +5,13 @@ import numpy as np
 from tqdm import tqdm
 from torch_geometric.data import Data
 
-descriptors = np.load(f'model/descriptors.npz')
+try:
+    from importlib import resources
+except Exception:
+    import importlib_resources as resources
+
+with resources.files("deepfit").joinpath("model").joinpath("descriptors.npz").open("rb") as fh:
+    descriptors = np.load(fh)
 
 periodic_table = {'h': 1, 'he': 2, 'li': 3, 'be': 4, 'b': 5, 'c': 6, 'n': 7, 'o': 8, 'f': 9, 'ne': 10, 
                   'na': 11, 'mg': 12, 'al': 13, 'si': 14, 'p': 15, 's': 16, 'cl': 17, 'ar': 18, 
