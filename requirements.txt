@@ -1,0 +1,4 @@
+pytorch==2.8.0
+numpy==2.0.2
+torch_geometric==2.6.1
+e3nn==0.5.7
