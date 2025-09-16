@@ -76,7 +76,7 @@ Where:
 DeepFit supports K-edge analysis for:
 - **3d metals**: Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn
 - **4d metals**: Zr, Nb, Mo, Ru, Rh, Pd, Ag
-  in any organic coordination environment
+- in any organic coordination environment
 
 ## Citation
 
