@@ -6,7 +6,7 @@ with open("requirements.txt") as f:
 
 # Data files inside the package (non-Python files)
 PACKAGE_DATA = {
-    "deepfit": [
+    "deepfit_package": [
         "model/*.npz",
         "model/*.py",
         "model/weights/*",
@@ -20,7 +20,7 @@ setup(
     url="https://github.com/KirillKulaev/DeepFit",
     author="Kirill Kulaev, Bogdan Procenko",
     author_email="<your-email@example.com>",
-    packages=find_packages(include=["deepfit", "deepfit.*"]),
+    packages=find_packages(include=["deepfit_package", "deepfit_package.*"]),
     package_data=PACKAGE_DATA,
     include_package_data=True,
     install_requires=REQUIRED_PACKAGES,
@@ -28,7 +28,7 @@ setup(
     license="Apache 2.0",
     entry_points={
         "console_scripts": [
-            "deepfit=deepfit.DeepFit:main",
+            "deepfit_package=deepfit.DeepFit:main",
         ],
     },
     classifiers=[
