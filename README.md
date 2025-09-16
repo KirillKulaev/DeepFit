@@ -8,29 +8,6 @@ DeepFit is a deep learning approach for physically and chemically informed on-th
 pip install deepfit_package
 ```
 
-## Quick Start
-
-```python
-import deepfit_package
-from deepfit_package import DeepFit, Structure
-
-# Create a structure from XYZ coordinates
-xyz = """Rh 0.0 0.0 0.0
-O 1.8 0.0 0.0
-N 0.0 1.8 0.0
-C 0.0 0.0 1.8"""
-
-structure = Structure(xyz, absorber='Rh', charge=0, spin=0)
-
-# Load your experimental spectrum (numpy array)
-experimental_spectrum = load_your_spectrum()
-
-# Initialize DeepFit with your model
-deepfit = DeepFit(structure, experimental_spectrum, model_path='path/to/model')
-
-# Run structure refinement
-refined_structure, final_spectrum = deepfit.run(num_steps=200)
-```
 
 ## Usage Examples
 
@@ -38,24 +15,51 @@ refined_structure, final_spectrum = deepfit.run(num_steps=200)
 
 ```python
 # Basic structure refinement
-refined_structure, predicted_spectrum = deepfit.run(num_steps=200, verbose=1)
 
-# With energy constraints ($\lambda$ parameter)
-refined_structure, predicted_spectrum = deepfit.run(
-    num_steps=200, 
-    lambda=2.0,  # Balance between spectral fit and energy minimization
-    verbose=1
-)
+## Quick Start
+
+```python
+import deepfit_package
+from deepfit_package import DeepFit, Structure, Net
+
+# Create a structure from XYZ coordinates
+xyz = """Rh 0.0 0.0 0.0
+O  1.8  0.0  0.0
+O  0.0  1.8  0.0
+O  0.0  0.0  1.8
+O -0.9 -0.9 -0.9
+"""
+
+# Load your experimental spectrum (numpy array)
+experimental_spectrum = load_your_spectrum()
+
+struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin states for unpaired electron number, not the spin multiplicity number!
+deepfit = DeepFit(struct,
+                  spectrum,
+                  model=Net(device='cpu'),
+                  path2xtb=path2xtb, # path for xtb.exe file for forces estimation
+                  step_speed=0.125,
+                  forces_coeff=2., # Balance between spectral fit and energy minimization
+                  fit_edges=(1.5, 8)) # Boundaries of k, on which the spectrum differences are calculated
+
+refined_structure, refined_spectra = deepfit.run(verbose=1,
+                                                 num_steps=200,
+                                                 final_geomopt=True, 
+                                                 distance_weightning=True)
 ```
 
 ### Spectrum Prediction
 
 ```python
 # Predict spectrum for a given structure
-predicted_spectrum = model.predict(structure_data)
-
-# Compare with experimental data
-deviation = deepfit.normed_l2(predicted_spectrum, experimental_spectrum, k_values, mask)
+xyz = """Rh 0.0 0.0 0.0
+O  1.8  0.0  0.0
+O  0.0  1.8  0.0
+O  0.0  0.0  1.8
+O -0.9 -0.9 -0.9
+"""
+struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin states for unpaired electron number, not the spin multiplicity number!
+predicted_spectrum = model(structure_data)
 ```
 
 ## Method Overview
