@@ -1,12 +1,14 @@
-from setuptools import setup, find_packages
-import os
+from setuptools import setup
 
 # Read requirements from requirements.txt
 with open("requirements.txt") as f:
     REQUIRED_PACKAGES = f.read().splitlines()
 
-# Get package directory
-package_dir = "deepfit_package"
+# Define package data
+PACKAGE_DATA = [
+    "model/*.npz",
+    "model/weights/*",
+]
 
 setup(
     name="deepfit_package",
@@ -15,15 +17,11 @@ setup(
     url="https://github.com/KirillKulaev/DeepFit",
     author="Kirill Kulaev, Bogdan Procenko",
     author_email="<your-email@example.com>",
-    packages=find_packages(),
-    package_dir={"deepfit_package": "deepfit_package"},
+    # Explicitly define packages instead of using find_packages
+    packages=["deepfit_package", "deepfit_package.model"],
     package_data={
-        "deepfit_package": [
-            "model/*.npz",
-            "model/weights/*",
-        ]
+        "deepfit_package": PACKAGE_DATA,
     },
-    include_package_data=True,
     install_requires=REQUIRED_PACKAGES,
     python_requires=">=3.7",
     license="Apache 2.0",
