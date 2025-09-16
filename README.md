@@ -84,7 +84,7 @@ If you use DeepFit in your research, please cite:
 ```bibtex
 @article{deepfit2025,
   title={DeepFit: physically and chemically informed XAS-Structure fitting made simple},
-  author={Kulaev, Kirill and Protsenko, Bogdan and Cheng, Weiren and others},
+  author={Kulaev Kirill, Protsenko Bogdan, Alexander Guda, Mikhail Soldatov and others},
   journal={To be published},
   year={2025}
 }
