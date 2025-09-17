@@ -1,4 +1,4 @@
-# DeepFit: Physically and Chemically Informed XAS-Structure Fitting
+# DeepFit: Physically and Chemically Informed XAS-Structure Fitting made simple
 
 DeepFit is a deep learning approach for physically and chemically informed on-the-fly XANES spectra analysis. This package provides a unified framework for quantitative XANES analysis that combines spectroscopic sensitivity with quantum-chemical energy constraints.
 
