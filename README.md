@@ -86,7 +86,7 @@ If you use DeepFit in your research, please cite:
 @article{deepfit2025,
   title={DeepFit: physically and chemically informed XAS-Structure fitting made simple},
   author={Kulaev Kirill, Protsenko Bogdan, Alexander Guda, Sergey Guda, Mikhail Soldatov, Alexander Soldatov and others},
-  url={http://dx.doi.org/10.26434/chбemrxiv-2025-xn5zb-v2},
+  url={http://dx.doi.org/10.26434/chemrxiv-2025-xn5zb-v2},
   journal={To be published},
   year={2025}
 }
