@@ -27,7 +27,7 @@ O -0.9 -0.9 -0.9
 """
 
 struct = Structure(xyz, absorber='Rh', charge=0, device='cpu')
-predicted_spectrum = model(structure_data)
+predicted_spectrum = model(struct.data)
 ```
 
 ### Structure Refinement
