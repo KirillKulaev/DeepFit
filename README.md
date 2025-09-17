@@ -68,7 +68,7 @@ R^* = \arg\min_{R} \left[ D(X,\mathbf{R},\chi(k)) + \lambda E(\mathbf{R}) \right
 
 Where:
 - $D(X,\mathbf{R},\chi(k))$ is the spectral deviation between predicted and experimental spectra
-- $E(\mathbf{R})$ is the quantum-mechanical energy of the system
+- $E(\mathbf{R})$ is energy of the system
 - $\lambda$ is a parameter balancing spectroscopic and energetic constraints
 
 ## Supported Elements
