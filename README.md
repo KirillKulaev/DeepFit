@@ -15,6 +15,9 @@ pip install deepfit_package
 
 ```python
 # Predict spectrum for a given structure
+from deepfit_package import Net, Structure
+model = Net()
+
 xyz = """Rh 0.0 0.0 0.0
 O  1.8  0.0  0.0
 O  0.0  1.8  0.0
