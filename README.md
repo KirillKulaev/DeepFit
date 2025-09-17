@@ -11,6 +11,20 @@ pip install deepfit_package
 
 ## Usage Examples
 
+### Spectrum Prediction
+
+```python
+# Predict spectrum for a given structure
+xyz = """Rh 0.0 0.0 0.0
+O  1.8  0.0  0.0
+O  0.0  1.8  0.0
+O  0.0  0.0  1.8
+O -0.9 -0.9 -0.9
+"""
+struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin states for unpaired electron number, not the spin multiplicity number!
+predicted_spectrum = model(structure_data)
+```
+
 ### Structure Refinement
 
 ```python
@@ -44,19 +58,6 @@ refined_structure, refined_spectra = deepfit.run(verbose=1,
                                                  distance_weightning=True)
 ```
 
-### Spectrum Prediction
-
-```python
-# Predict spectrum for a given structure
-xyz = """Rh 0.0 0.0 0.0
-O  1.8  0.0  0.0
-O  0.0  1.8  0.0
-O  0.0  0.0  1.8
-O -0.9 -0.9 -0.9
-"""
-struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin states for unpaired electron number, not the spin multiplicity number!
-predicted_spectrum = model(structure_data)
-```
 
 ## Method Overview
 
