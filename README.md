@@ -5,8 +5,8 @@ DeepFit is a deep learning approach for physically and chemically informed on-th
 ## Installation
 
 ```bash
-    git clone https://github.com/KirillKulaev/deepfit_package.git
-    pip install ./DeepFit
+git clone https://github.com/KirillKulaev/deepfit_package.git
+pip install ./DeepFit
 ```
 
 
