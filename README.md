@@ -59,7 +59,7 @@ deepfit = DeepFit(struct,
 
 refined_structure, refined_spectra = deepfit.run(verbose=1,
                                                  num_steps=200,
-                                                 final_geomopt=True, 
+                                                 final_geomopt_steps=0, 
                                                  distance_weightning=True)
 ```
 
@@ -69,7 +69,7 @@ refined_structure, refined_spectra = deepfit.run(verbose=1,
 DeepFit is a method for structure-XAS fitting. The optimization objective combines spectral agreement and chemical plausibility:
 
 ```math
-R^* = \arg\min_{R} \left[ D(X,\mathbf{R},\chi(k)) + \lambda E(\mathbf{R}) \right]
+R^* = \argmin_{R} \left[ D(X,\mathbf{R},\chi(k)) + \lambda E(\mathbf{R}) \right]
 ```
 
 Where:
