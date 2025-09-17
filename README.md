@@ -52,7 +52,7 @@ struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin
 deepfit = DeepFit(struct,
                   spectrum,
                   model=Net(device='cpu'),
-                  path2xtb=path2xtb, # path for xtb.exe file for forces estimation
+                  path2xtb='../xtb', # path for xtb.exe file for forces estimation
                   step_speed=0.125,
                   forces_coeff=2., # Balance between spectral fit and energy minimization
                   fit_edges=(1.5, 8)) # Boundaries of k, on which the spectrum differences are calculated
