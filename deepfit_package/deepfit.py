@@ -117,7 +117,7 @@ class DeepFit():
             return '\n'.join([f'{i} {float(j[0])} {float(j[1])} {float(j[2])}' for i, j in zip(struct.elements, struct.pos)])
 
     
-        def run(self, num_steps=500, verbose=1, final_geomopt=False, distance_weightning=False):
+        def run(self, num_steps=500, verbose=1, final_geomopt_steps=10, distance_weightning=False):
             print(f'Fitting of the structure')
             for iteration in tqdm(range(num_steps)):
                 
@@ -136,7 +136,7 @@ class DeepFit():
                     else:
                         self.structure.data['pos'].grad += self.forces_coeff*forces
 
-                    if final_geomopt and (num_steps - iteration) < 10:
+                    if (num_steps - iteration) < final_geomopt_steps:
                         self.structure.data['pos'].grad = self.forces_coeff*forces
                         
                     if verbose == 1 and iteration % 5 == 0:
