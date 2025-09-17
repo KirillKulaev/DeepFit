@@ -45,7 +45,7 @@ O -0.9 -0.9 -0.9
 """
 
 # Load your experimental spectrum (numpy array)
-experimental_spectrum = load_your_spectrum()
+experimental_spectrum = load_your_spectrum() # change for your actual spectrum loading
 
 struct = Structure(xyz, absorber='Rh', charge=0, device='cpu') # Nota Bene: spin states for unpaired electron number, not the spin multiplicity number!
 deepfit = DeepFit(struct,
