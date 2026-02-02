@@ -103,4 +103,4 @@ For questions and support, please open an issue on GitHub or contact the develop
 
 ## Acknowledgments
 
-This work was supported by the Russian Science Foundation (Project No. 24-43-00215) and the Strategic Academic Leadership Program of the Southern Federal University ("Priority 2030").
+The development of DeepFit framework was supported by a grant from the Russian Science Foundation № 25-42-00116, https://rscf.ru/project/25-42-00116/ (M.A.S., B.O.P, K.D.K), National Natural Science Foundation of China (China-Russia Cooperation Program, No.: W2412038) (Q.L.), and the International Partnership Program of Chinese Academy of Sciences (Grant No.123GJHZ2024102FN) (W.C.). Rh K-edge XAS experiment and data analysis was supported by the strategic Academic Leadership Program of the Southern Federal University (“Priority 2030”) (B.O.P, K.D.K, S.A.G., M.L., A.V.S.). Authors acknowledge methodological support and computational resources from Yandex Cloud Center for Social Technologies (https://yandex.cloud/en/social-tech) for training neural networks.
