@@ -31,7 +31,7 @@ def get_normed_spectra(spectra, k):
 
 
 def masked_normed_l1(candidate_signal, ref_spectra, k, left, right):
-    mask = (k > left) & (right < 8.)
+    mask = (k > left) & (k < right)
     candidate_signal = candidate_signal[mask]
     ref_spectra = ref_spectra[0][mask]
     k = k[mask]
