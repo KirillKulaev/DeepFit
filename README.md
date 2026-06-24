@@ -89,12 +89,17 @@ DeepFit supports K-edge analysis for:
 If you use DeepFit in your research, please cite:
 
 ```bibtex
-@article{deepfit2025,
-  title={DeepFit: physically and chemically informed XAS-Structure fitting made simple},
-  author={Kulaev Kirill, Protsenko Bogdan, Alexander Guda, Sergey Guda, Mikhail Soldatov, Alexander Soldatov and others},
-  url={http://dx.doi.org/10.26434/chemrxiv-2025-xn5zb-v2},
-  journal={To be published},
-  year={2025}
+@article{deepfit2026,
+  title={DeepFit: Physically and Chemically Informed XAS-Structure Fitting Made Simple},
+  author={Kulaev, Kirill and Protsenko, Bogdan and Cheng, Weiren and Liu, Qinghua and Gorbunov, Dmitry and Lifar, Mikhail and Vlasenko, Valery and Burlov, Anatolii and Guda, Sergey and Guda, Alexander and Soldatov, Mikhail and Soldatov, Alexander},
+  journal={The Journal of Physical Chemistry Letters},
+  year={2026},
+  volume={17},
+  number={14},
+  pages={4190--4199},
+  publisher={American Chemical Society},
+  doi={10.1021/acs.jpclett.5c04009},
+  url={https://doi.org/10.1021/acs.jpclett.5c04009}
 }
 ```
 ## Support
